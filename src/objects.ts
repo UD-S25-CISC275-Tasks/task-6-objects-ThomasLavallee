@@ -31,8 +31,18 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
-    console.log(question, answer);
-    return false;
+    // Remove whitespace and turn answer to lowercase
+    const trimmedAnswer: string = answer.trim().toLowerCase();
+
+    // Copy interface but without whitespace and lowercase in expected
+    const trimmedQuestion: Question = {
+        ...question,
+        options: [...question.options],
+        expected: question.expected.trim().toLowerCase(),
+    };
+
+    // Compare if answer and expected are equal
+    return trimmedAnswer === trimmedQuestion.expected;
 }
 
 /**
