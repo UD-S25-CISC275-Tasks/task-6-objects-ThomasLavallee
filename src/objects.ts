@@ -191,8 +191,13 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
-    console.log(question, newOption);
-    return question;
+    // Creates new question with all fields of old question, and deep copy of options array with new option added
+    let newQuestion = {
+        ...question,
+        options: [...question.options, newOption],
+    };
+
+    return newQuestion;
 }
 
 /**
