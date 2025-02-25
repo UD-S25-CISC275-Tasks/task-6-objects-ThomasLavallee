@@ -138,8 +138,14 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    console.log(question, newName);
-    return question;
+    // Create new question, with all fields of old question, new name and deep copy of options array
+    let newQuestion = {
+        ...question,
+        name: newName,
+        options: [...question.options],
+    };
+
+    return newQuestion;
 }
 
 /**
