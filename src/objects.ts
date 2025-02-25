@@ -52,8 +52,21 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    console.log(question, answer);
-    return false;
+    let isValidQuestion: boolean;
+
+    // For short answer question any answer is valid
+    if (question.type === "short_answer_question") {
+        isValidQuestion = true;
+    } else {
+        // Check if answer matches at least one of the multiple choice options
+        isValidQuestion = question.options.some(
+            (currentAnswer: string): boolean => {
+                return currentAnswer === answer;
+            },
+        );
+    }
+
+    return isValidQuestion;
 }
 
 /**
