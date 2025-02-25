@@ -138,7 +138,7 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    // Create new question, with all fields of old question, new name and deep copy of options array
+    // Create new question, with all fields of old question, new name, and deep copy of options array
     let newQuestion = {
         ...question,
         name: newName,
@@ -154,7 +154,14 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    // Create new question with all old fields, inverted published field, and deep copy of options array
+    let newQuestion = {
+        ...question,
+        published: !question.published,
+        options: [...question.options],
+    };
+
+    return newQuestion;
 }
 
 /**
