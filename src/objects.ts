@@ -171,7 +171,16 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    return oldQuestion;
+    // Copy all old fields, change name, change id, change published to false, and make a deep copy of the options array
+    let newQuestion = {
+        ...oldQuestion,
+        id: id,
+        name: `Copy of ${oldQuestion.name}`,
+        published: false,
+        options: [...oldQuestion.options],
+    };
+
+    return newQuestion;
 }
 
 /**
