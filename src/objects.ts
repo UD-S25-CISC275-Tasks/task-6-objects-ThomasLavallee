@@ -107,8 +107,30 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    console.log(question);
-    return "";
+    // Set up the first two lines
+    let formattedQuestion: string = `# ${question.name}\n${question.body}`;
+
+    // If question is multiple choice, add all the options on separate lines
+    if (question.type === "multiple_choice_question") {
+        // Format the options
+        let multipleChoiceOptions: string = question.options.reduce(
+            (combinedOptions: string, currentOption: string): string => {
+                return combinedOptions + "- " + currentOption + "\n";
+            },
+            "",
+        );
+
+        // Remove extra newline from last option
+        multipleChoiceOptions = multipleChoiceOptions.slice(
+            0,
+            multipleChoiceOptions.length - 1,
+        );
+
+        // Add options to whole question
+        formattedQuestion += "\n" + multipleChoiceOptions;
+    }
+
+    return formattedQuestion;
 }
 
 /**
