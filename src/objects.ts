@@ -214,6 +214,15 @@ export function mergeQuestion(
     contentQuestion: Question,
     { points }: { points: number },
 ): Question {
-    console.log(points);
-    return contentQuestion;
+    // Creates new question, deep copy of options array, uses parameters as values for fields
+    let newQuestion = {
+        ...contentQuestion,
+        options: [...contentQuestion.options],
+        id: id,
+        name: name,
+        published: false,
+        points: points,
+    };
+
+    return newQuestion;
 }
